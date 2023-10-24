@@ -1,24 +1,5 @@
-# README
+# Bookers2 - theme a
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a repository for extending Bookers2 to learn the functionality of SNS.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The [bookers2-v2](https://github.com/3-masato/bookers2-v2) repository is replicated for each theme.
