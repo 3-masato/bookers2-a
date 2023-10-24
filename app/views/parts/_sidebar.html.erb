@@ -20,8 +20,9 @@
       <% end %>
     </div>
   <% else %>
-    <div class="text-center">
+    <div class="d-flex flex-wrap justify-content-around mx-auto">
       <%= render "relationships/btn", user: user %>
+      <%= render "rooms/btn", user: user %>
     </div>
   <% end %>
 </section>

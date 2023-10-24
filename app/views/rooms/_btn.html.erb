@@ -1,0 +1,17 @@
+<% if show_chat_link?(current_user, user) %>
+  <% chat_data = current_user.chat(user) %>
+  <% room_id = chat_data[:room_id] %>
+  <% room = chat_data[:room] %>
+  <% entry = chat_data[:entry] %>
+
+  <% if room_id %>
+    <%= link_to "Go to Chat", room_path(room_id), class: "btn btn-primary btn-sm m-1" %>
+  <% else %>
+    <%= form_with model: room, local: true do |f| %>
+      <%= f.fields_for :entry, entry do |e| %>
+        <%= e.hidden_field :user_id, value: user.id %>
+      <% end %>
+      <%= f.submit "Start Chat", class: "btn btn-primary btn-sm m-1" %>
+    <% end %>
+  <% end %>
+<% end %>
