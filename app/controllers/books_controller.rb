@@ -13,7 +13,11 @@ class BooksController < ApplicationController
 
   def index
     @user = current_user
-    @books = Book.all
+    to = Time.current.at_end_of_day
+    from = (to - 6.day).at_beginning_of_day
+    @books = Book.includes(:faved_users).sort_by {|book|
+      book.faved_users.includes(:favorites).where(created_at: from...to).size
+    }.reverse
   end
 
   def edit

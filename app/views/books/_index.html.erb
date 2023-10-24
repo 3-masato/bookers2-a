@@ -1,6 +1,6 @@
 <section class="mb-4">
   <h2><%= heading ||= "Books" %></h2>
-  <% if books.all.count == 0 %>
+  <% if books.count == 0 %>
     <% unless (empty_message ||= "").empty? %>
       <p class="text-center"><%= empty_message %></p>
     <% end %>
