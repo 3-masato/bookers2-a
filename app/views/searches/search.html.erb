@@ -1,5 +1,5 @@
 <%= render "parts/frame", user: @user, type: :full do %>
-  <% if @records.all.count == 0 %>
+  <% if @records.count == 0 %>
     <h2>No results for "<%= @content %>"</h2>
     <p><%= no_result_text %></p>
   <% else %>
