@@ -1,32 +1,42 @@
-<section>
-  <h2><%= @user.name %>さんとのチャット</h2>
+<%= render "parts/frame", user: @user, type: :full do %>
+  <section class="mb-2">
+    <h2>Chat with <strong><%= @user.name %></strong></h2>
 
-  <%= link_to "ユーザー一覧に戻る", users_path %>
+    <%= link_to "Back to User List", users_path %>
 
-  <div>
-    <% if @messages.present? %>
-      <% @messages.each do |msg| %>
-        <div class="d-flex">
-          <div class="font-weight-bold"><%= msg.user.name %></div>
-          <div class="pl-2"><%= msg.message %></div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div class="form-body">
-    <%= form_with model: @message, local: true do |f| %>
-      <div class="form-group">
-        <%= f.text_field :message, placeholder: "Enter message here", class: "form-control" %>
+    <div class="chat-container">
+      <div class="chat-message">
+        <% if @messages.present? %>
+          <% @messages.each do |msg| %>
+            <div class="chat-message-item">
+              <% if current_user == msg.user %>
+                <div class="chat-message-item-body chat-message-item-self" data-user="self">
+                  <div class="chat-message-item-text"><%= msg.message %></div>
+                </div>
+              <% else %>
+                <div class="chat-message-item-body" data-user="other">
+                  <div class="chat-message-item-icon">
+                    <%= image_tag msg.user.get_profile_image, size: "48x48" %>
+                  </div>
+                  <div class="chat-message-item-text"><%= msg.message %></div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
       </div>
 
-      <div class="form-group">
-        <%= f.hidden_field :room_id, value: @room.id %>
+      <div class="chat-form form-body">
+        <%= form_with model: @message, local: true do |f| %>
+          <div class="d-flex">
+            <%= f.text_field :message, placeholder: "Enter message here", class: "form-control mr-2" %>
+            <%= f.hidden_field :room_id, value: @room.id %>
+            <%= f.button type: "submit", class: "btn btn-success btn-sm d-flex justify-content-center align-items-center px-3" do %>
+              <i class="fa-solid fa-paper-plane"></i><span class="d-md-block d-none ml-2">Send</span>
+            <% end %>
+          </div>
+        <% end %>
       </div>
-
-      <div class="form-group">
-        <%= f.submit "Send", class: "btn btn-success btn-sm" %>
-      </div>
-    <% end %>
-  </div>
-</section>
+    </div>
+  </section>
+<% end %>

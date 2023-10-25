@@ -1,5 +1,5 @@
 <%= render 'layouts/errors', model: @book %>
-<%= render "parts/frame", type: :middle do %>
+<%= render "parts/frame", type: :medium do %>
   <%= render "books/form", book: @book, heading: "Editing Book", action: :update do %>
     <div>
       <%= link_to "Show", book_path(@book.id) %> | <%= link_to "Back", books_path %>
